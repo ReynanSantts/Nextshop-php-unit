@@ -1,0 +1,124 @@
+/* style.css - Custom styles complementing Bootstrap 5 for NextShop login page */
+
+/* Ensure full height and width for body and html */
+body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background-color: #121212; /* Dark background */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #e0e0e0;
+}
+
+/* Container max width for form and user box */
+.container, .user-email-box, form.w-100 {
+    max-width: 480px;
+}
+
+/* Logo styling */
+.logo-img {
+    width: 400px; /* Aumentado para tamanho maior conforme solicitado */
+    margin-bottom: 0.5rem; /* Reduz o espaçamento abaixo para subir a logo sem descer os itens */
+}
+
+/* Caixa de email do usuário */
+.user-email-box {
+    background-color: #1e1e1e;
+    border: 1px solid #444;
+    border-radius: 8px;
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Avatar do usuário */
+.user-email-box .avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid #00ff00; /* Borda verde brilhante */
+    object-fit: cover;
+}
+
+/* Nome do usuário */
+.user-email-box .user-name {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+/* Email do usuário */
+.user-email-box .user-email {
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+}
+
+/* Parte oculta do email */
+.user-email-box .masked-email {
+    color: #888;
+    font-weight: 700;
+}
+
+/* Link dentro da caixa de email */
+.user-email-box a {
+    font-size: 1rem;
+}
+
+/* Grupo de input da senha */
+.password-group .form-control {
+    border-radius: 0.375rem;
+}
+
+/* Ícone do grupo de input da senha */
+.password-group .input-group-text {
+    border-radius: 0.375rem 0 0 0.375rem;
+}
+
+/* Botão para mostrar/ocultar senha */
+.password-group .btn {
+    border-radius: 0 0.375rem 0.375rem 0;
+    color: #00ff00;
+}
+
+/* Cor da borda ao focar no input */
+.password-group .form-control:focus, 
+.password-group .form-control:focus-visible {
+    border-color: #00ff00;
+    box-shadow: 0 0 0 0.25rem rgba(0, 255, 0, 0.25);
+    outline: none;
+}
+
+/* Estilo do botão verde */
+.btn-success {
+    background-color: #00ff00;
+    border-color: #00ff00;
+    color: #121212;
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: 0.05em;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover/focus do botão verde */
+.btn-success:hover, .btn-success:focus {
+    background-color: #00cc00;
+    border-color: #00cc00;
+    color: #121212;
+}
+
+/* Evita seleção de texto em labels */
+.form-check-label {
+    user-select: none;
+}
+
+/* Links verdes */
+a.text-success {
+    color: #00ff00 !important;
+    font-weight: 600;
+}
+
+/* Hover dos links verdes */
+a.text-success:hover {
+    color: #00cc00 !important;
+    text-decoration: underline;
+}
