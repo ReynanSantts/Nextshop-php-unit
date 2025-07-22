@@ -1,9 +1,0 @@
-body{
-    background-image: url('templtes/Nextshop.png');
-    background-size: cover;      /* Faz a imagem cobrir toda a tela */
-    background-position: center; /* Centraliza a imagem */
-    background-repeat: no-repeat;/* Não repete a imagem */
-    /* ...outros estilos... */
-}
-
-
