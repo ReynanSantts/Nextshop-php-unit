@@ -1,0 +1,16 @@
+{
+    "name": "reynan/nextshop",
+    "description": "Site de E-commerce",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Reynan\\Nextshop\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Reynan,Raphael,Lucas"
+        }
+    ],
+    "require": {}
+}
