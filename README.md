@@ -1,1 +1,1 @@
-<img src="Images/NextShop.png" alt="NextShop Banner">
+<img src="NextShop.png" alt="NextShop Banner">
