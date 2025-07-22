@@ -1,0 +1,109 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('images/NextShop Background.png');
+    font-family: 'Montserrat', Arial, sans-serif;
+    color: #fff;
+    min-height: 100vh;
+}
+
+.register-container {
+    width: 700px;
+    margin: 40px auto;
+    background: #222;
+    border-radius: 2rem;
+    min-height: 90vh;
+    position: relative;
+    box-shadow: 0 0 40px #0008;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.back-btn {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: #333;
+    color: #00ff2a;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    z-index: 2;
+}
+.back-btn:hover {
+    background: #111;
+}
+
+.form-content {
+    width: 100%;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-content h2 {
+    margin: 0 0 10px 0;
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+form {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #555;
+    padding: 12px 0 8px 0;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    letter-spacing: 1px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-bottom: 2px solid #00ff2a;
+}
+
+.btn-continuar {
+    margin-top: 30px;
+    padding: 10px 0;
+    width: 60%;
+    align-self: center;
+    background: #00ff2a;
+    color: #111;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-continuar:hover {
+    background: #00cc22;
+}
