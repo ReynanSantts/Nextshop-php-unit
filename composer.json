@@ -9,8 +9,9 @@
     },
     "authors": [
         {
-            "name": "Reynan,Raphael,Lucas"
+            "name": "Reynan,Lucas,Raphael"
         }
     ],
+    "minimum-stability": "dev",
     "require": {}
 }
