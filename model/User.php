@@ -1,60 +1,85 @@
 <?php
-/**
- * Classe modelo User para representar e manipular dados de usuários.
- * Preparada para futura integração com banco de dados MySQL.
- */
+
 namespace Model;
+
+use Model\Connection;
 
 use PDO;
 use PDOException;
 use Exception;
 
-class User {
-    private $id;
-    private $nome;
-    private $email;
-    private $senhaHash;
-    private $criadoEm;
+class User
+{
+    private $Ns;
 
-    public function __construct($nome = null, $email = null, $senhaHash = null) {
-        $this->nome = $nome;
-        $this->email = $email;
-        $this->senhaHash = $senhaHash;
+
+    public function __construct()
+    {
+        $this->Ns = Connection::getInstance();
     }
 
-    // Getters e setters
-    public function getId() {
-        return $this->id;
-    }
+    // FUNÇÃO DE CRIAR USUÁRIO
+public function registerUser($user_fullname, $email, $cpf, $password)
+{
+    try {
+        $sql = 'INSERT INTO user (user_name, user_email, user_cpf, user_password, created_at) VALUES (:user_name, :user_email, :user_cpf, :user_password, NOW())';
 
-    public function getNome() {
-        return $this->nome;
-    }
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    public function setNome($nome) {
-        $this->nome = $nome;
-    }
+        $stmt = $this->Ns->prepare($sql);
 
-    public function getEmail() {
-        return $this->email;
-    }
+        $stmt->bindParam(":user_name", $user_fullname, PDO::PARAM_STR);
+        $stmt->bindParam(":user_email", $email, PDO::PARAM_STR);
+        $stmt->bindParam(":user_cpf", $cpf, PDO::PARAM_STR);
+        $stmt->bindParam(":user_password", $hashedPassword, PDO::PARAM_STR);
 
-    public function setEmail($email) {
-        $this->email = $email;
-    }
+        return $stmt->execute();
 
-    public function getSenhaHash() {
-        return $this->senhaHash;
+    } catch (PDOException $error) {
+        echo "Erro ao executar o comando " . $error->getMessage();
+        return false;
     }
-
-    public function setSenhaHash($senhaHash) {
-        $this->senhaHash = $senhaHash;
-    }
-
-    public function getCriadoEm() {
-        return $this->criadoEm;
-    }
-
-    // Métodos para futura integração com banco de dados podem ser adicionados aqui
 }
+
+    // LOGIN
+    public function getUserByEmail($email)
+    {
+        try {
+            $sql = "SELECT * FROM user WHERE email = :email LIMIT 1";
+
+            $stmt = $this->Ns->prepare($sql);
+
+            $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $error) {
+        }
+    }
+
+    // OBTER INFORMAÇÕES DO USUÁRIO
+    public function getUserInfo($id, $user_fullname, $email)
+    {
+        try {
+            $sql = "SELECT user_fullname, email FROM user WHERE id = :id AND user_fullname = :user_fullname AND email = :email";
+
+            $stmt = $this->Ns->prepare($sql);
+
+            $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+            $stmt->bindParam(":user_fullname", $user_fullname, PDO::PARAM_STR);
+            $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+
+        } catch (PDOException $error) {
+            echo "Erro ao buscar informações: " . $error->getMessage();
+            return false;
+        }
+    }
+}
+
 ?>

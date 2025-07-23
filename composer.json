@@ -1,0 +1,20 @@
+{
+    "name": "reynan/nextshop",
+    "description": "Site de E-commerce",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Reynan\\Nextshop\\": "src/",
+            "Controller\\": "Controller/",
+             "Model\\": "Model/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Spaceza",
+            "email": "raphaelssposito@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

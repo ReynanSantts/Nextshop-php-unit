@@ -1,31 +1,4 @@
 <?php
-require_once __DIR__ . '/../controller/UserController.php';
-
-session_start();
-
-// Simulação de usuário logado com ID 1 (ajustar conforme autenticação real)
-$userId = 1;
-
-$userController = new UserController();
-
-// Função para mascarar email parcialmente
-function maskEmail($email) {
-    $parts = explode("@", $email);
-    if (count($parts) !== 2) {
-        return $email;
-    }
-    $name = $parts[0];
-    $domain = $parts[1];
-    $maskedName = substr($name, 0, 2) . str_repeat("*", max(0, strlen($name) - 4)) . substr($name, -2);
-    return $maskedName . "@" . $domain;
-}
-
-// Email selecionado para exibir (pode vir de sessão, cookie, etc.)
-// Aqui usamos o email principal do usuário para demonstração
-$user = $userController->getUserByEmail('email@exemplo.com');
-$userName = $user ? $user->getNome() : 'Indisponível';
-$userEmail = $user ? $user->getEmail() : 'Indisponível';
-$maskedEmail = $userEmail !== 'Indisponível' ? maskEmail($userEmail) : '';
 
 ?>
 <!DOCTYPE html>
@@ -46,11 +19,7 @@ $maskedEmail = $userEmail !== 'Indisponível' ? maskEmail($userEmail) : '';
     <div class="d-flex flex-column justify-content-center align-items-center vh-100 vw-100 text-light">
         <!-- Logo maior, nome já incluso na imagem -->
         <div class="mb-5 text-center">
-<<<<<<< HEAD:View/paginaLogin.php
             <img src="../templates/images/LogoNextShop.png" alt="Logo NextShop" class="logo-img logo-img-large" />
-=======
-            <img src="../templates/assets/images/LogoNextShop.png" alt="Logo NextShop" class="logo-img logo-img-large" />
->>>>>>> login:View/index.php
         </div>
 
         <!-- Caixa de email do usuário -->

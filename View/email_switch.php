@@ -1,30 +1,4 @@
 <?php
-require_once __DIR__ . '/../controller/UserController.php';
-
-session_start();
-
-// Simulação de usuário logado com ID 1 (ajustar conforme autenticação real)
-$userId = 1;
-
-$userController = new UserController();
-
-$message = '';
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $newEmail = filter_input(INPUT_POST, 'newEmail', FILTER_VALIDATE_EMAIL);
-    if ($newEmail) {
-        $success = $userController->addEmailForUser($userId, $newEmail);
-        if ($success) {
-            $message = 'Email adicionado com sucesso.';
-        } else {
-            $message = 'Erro ao adicionar email. Pode já existir.';
-        }
-    } else {
-        $message = 'Email inválido.';
-    }
-}
-
-// Buscar emails do usuário
-$emails = $userController->getEmailsByUserId($userId);
 
 ?>
 <!DOCTYPE html>
