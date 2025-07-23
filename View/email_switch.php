@@ -12,7 +12,7 @@
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- CSS personalizado -->
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../templates/assets/css/style.css" />
 </head>
 <body class="bg-dark text-light d-flex justify-content-center align-items-center vh-100 vw-100">
     <div class="card p-4" style="max-width: 400px; width: 100%;">

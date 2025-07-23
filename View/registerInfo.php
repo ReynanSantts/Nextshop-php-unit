@@ -6,12 +6,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="paginaRegisterInfo.css">
+    <link rel="stylesheet" href="../templates/assets/css/paginaRegisterInfo.css">
     <title>Página dos inputs Registrar</title>
 </head>
 <body>
     <div class="register-container">
-        <button class="back-btn" onclick="window.location.href='register.php'">&#8592;</button>
+        <button class="back-btn" onclick="window.location.href='../register.php'">&#8592;</button>
         <div class="form-content">
             <h2>CRIAR CONTA</h2>
             <p class="subtitle">O primeiro passo pra abrir sua conta é<br>informar uns dados ;)</p>

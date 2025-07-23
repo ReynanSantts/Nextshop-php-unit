@@ -9,7 +9,7 @@ body {
     background: #111;
     color: #fff;
     font-family: 'Montserrat', Arial, sans-serif;
-    background-image: url('/templates/assets/images/NextShop Background.png');
+    background-image: url('../../images/NextShop Background.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

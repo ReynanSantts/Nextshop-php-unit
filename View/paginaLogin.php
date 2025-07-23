@@ -7,7 +7,7 @@
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- CSS personalizado -->
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../templates/assets/css/style.css" />
     <!-- Ícones do Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
 </head>
@@ -16,7 +16,7 @@
     <div class="d-flex flex-column justify-content-center align-items-center vh-100 vw-100 bg-dark text-light">
         <!-- Logo maior, nome já incluso na imagem -->
         <div class="mb-5 text-center">
-            <img src="../images/LogoNextShop.png" alt="Logo NextShop" class="logo-img logo-img-large" />
+            <img src="../templates/images/LogoNextShop.png" alt="Logo NextShop" class="logo-img logo-img-large" />
         </div>
 
         <!-- Caixa de email do usuário -->
