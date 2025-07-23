@@ -7,13 +7,13 @@
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- CSS personalizado -->
-    <link rel="stylesheet" href="../templates/assets/css/style.css" />
+    <link rel="stylesheet" href="../templates/assets/css/paginaLogin.css" />
     <!-- Ícones do Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
 </head>
 <body>
 <body>
-    <div class="d-flex flex-column justify-content-center align-items-center vh-100 vw-100 bg-dark text-light">
+    <div class="d-flex flex-column justify-content-center align-items-center vh-100 vw-100 text-light">
         <!-- Logo maior, nome já incluso na imagem -->
         <div class="mb-5 text-center">
             <img src="../templates/images/LogoNextShop.png" alt="Logo NextShop" class="logo-img logo-img-large" />
@@ -66,7 +66,7 @@
 
         <!-- Texto inferior -->
         <div class="mt-5 text-center text-light">
-            Ainda não tem uma conta? <a href="#" class="text-success text-decoration-none">Cadastre-se</a>
+            Ainda não tem uma conta? <a href="registerInfo.php" class="text-success text-decoration-none">Cadastre-se</a>
         </div>
     </div>
 </body>
@@ -74,6 +74,6 @@
     <!-- Bootstrap 5 JS Bundle (includes Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- JS personalizado -->
-    <script src="js/script.js"></script>
+    <script src="../templates/js/script.js"></script>
 </body>
 </html>
