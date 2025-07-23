@@ -1,0 +1,103 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background: #111;
+    color: #fff;
+    font-family: 'Montserrat', Arial, sans-serif;
+    background-image: url('/templates/assets/images/NextShop Background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.logo-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.logo-img {
+    width: 30rem;
+    margin-top: -10rem;
+}
+
+.left-area {
+    position: absolute;
+    left: 60px;
+    transform: translateY(-50%);
+    margin-top: 15rem;
+}
+
+.slogan {
+    font-size: 1.6rem;
+    line-height: 1.2;
+    margin-bottom: 18px;
+}
+
+.highlight {
+    display: inline-block;
+    background: #00ff2a;
+    color: #111;
+    font-weight: bold;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 1.2rem;
+}
+
+.buttons-area {
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+}
+
+.btn-login, .btn-registrar {
+    font-size: 1.3rem;
+    padding: 18px 60px;
+    border-radius: 8px;
+    border: 2px solid #fff;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 35rem;
+}
+
+.btn-login {
+    background: transparent;
+    border: 1.5px solid #fff;
+}
+
+.btn-login:hover {
+    background: #222;
+}
+
+.btn-registrar {
+    background: #00ff2a;
+    color: #111;
+    border: none;
+}
+
+.btn-registrar:hover {
+    background: #00cc22;
+}
