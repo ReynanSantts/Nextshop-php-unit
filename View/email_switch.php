@@ -1,6 +1,30 @@
 <?php
-// Página de troca de email para seleção ou digitação de outro email
-// Futuramente será integrada com banco de dados para listar emails salvos
+require_once __DIR__ . '/../controller/UserController.php';
+
+session_start();
+
+// Simulação de usuário logado com ID 1 (ajustar conforme autenticação real)
+$userId = 1;
+
+$userController = new UserController();
+
+$message = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $newEmail = filter_input(INPUT_POST, 'newEmail', FILTER_VALIDATE_EMAIL);
+    if ($newEmail) {
+        $success = $userController->addEmailForUser($userId, $newEmail);
+        if ($success) {
+            $message = 'Email adicionado com sucesso.';
+        } else {
+            $message = 'Erro ao adicionar email. Pode já existir.';
+        }
+    } else {
+        $message = 'Email inválido.';
+    }
+}
+
+// Buscar emails do usuário
+$emails = $userController->getEmailsByUserId($userId);
 
 ?>
 <!DOCTYPE html>
@@ -17,6 +41,9 @@
 <body class="bg-dark text-light d-flex justify-content-center align-items-center vh-100 vw-100">
     <div class="card p-4" style="max-width: 400px; width: 100%;">
         <h3 class="mb-4 text-center">Trocar Email</h3>
+        <?php if ($message): ?>
+            <div class="alert alert-info"><?php echo htmlspecialchars($message); ?></div>
+        <?php endif; ?>
         <form action="#" method="post" novalidate>
             <div class="mb-3">
                 <label for="newEmail" class="form-label">Digite outro email</label>
@@ -25,10 +52,13 @@
             <div class="mb-3">
                 <label class="form-label">Emails salvos</label>
                 <ul class="list-group">
-                    <!-- Futuramente, listar emails salvos do banco de dados -->
-                    <li class="list-group-item bg-secondary text-light">usuario1@example.com</li>
-                    <li class="list-group-item bg-secondary text-light">usuario2@example.com</li>
-                    <li class="list-group-item bg-secondary text-light">usuario3@example.com</li>
+                    <?php if (!empty($emails)): ?>
+                        <?php foreach ($emails as $email): ?>
+                            <li class="list-group-item bg-secondary text-light"><?php echo htmlspecialchars($email); ?></li>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <li class="list-group-item bg-secondary text-light">Nenhum email salvo.</li>
+                    <?php endif; ?>
                 </ul>
             </div>
             <button type="submit" class="btn btn-success w-100">Confirmar</button>
