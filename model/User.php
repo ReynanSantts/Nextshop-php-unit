@@ -3,6 +3,11 @@
  * Classe modelo User para representar e manipular dados de usuários.
  * Preparada para futura integração com banco de dados MySQL.
  */
+namespace Model;
+
+use PDO;
+use PDOException;
+use Exception;
 
 class User {
     private $id;

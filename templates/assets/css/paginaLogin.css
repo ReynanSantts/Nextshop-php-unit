@@ -5,9 +5,11 @@ body, html {
     height: 100%;
     width: 100%;
     margin: 0;
-    background-color: #121212; /* Dark background */
+    background-image: url('../images/NextShopBackground1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #e0e0e0;
 }
 
 /* Container max width for form and user box */
