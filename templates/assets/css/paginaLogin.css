@@ -23,6 +23,25 @@ body, html {
     margin-bottom: 0.5rem; /* Reduz o espaçamento abaixo para subir a logo sem descer os itens */
 }
 
+.back-btn {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: #333;
+    color: #00ff2a;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    z-index: 2;
+}
+.back-btn:hover {
+    background: #111;
+}
+
 /* Caixa de email do usuário */
 .user-email-box {
     background-color: #1e1e1e;

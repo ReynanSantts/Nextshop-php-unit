@@ -5,7 +5,7 @@ namespace Controller;
 use Model\User;
 use Exception;
 
-class ControllerUser
+class ControllerUserR
 {
     private $userModel;
 
@@ -31,7 +31,7 @@ class ControllerUser
     // E-MAIL JÁ CADASTRADO?
     public function checkUserByEmail($user_email)
     {
-        return $this->userModel->getUserByEmail($user_email);
+         return $this->userModel->getUserByEmail($user_email);
     }
 
     // LOGIN DE USUÁRIO
@@ -60,6 +60,10 @@ class ControllerUser
     {
         return $this->userModel->getUserInfo($id, $user_name, $user_email);
     }
+    public function getFirstUser() {
+    return $this->userModel->getFirstUser();
+}
+
 }
 
 ?>

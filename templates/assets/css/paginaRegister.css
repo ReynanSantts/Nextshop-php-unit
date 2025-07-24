@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -71,7 +72,8 @@ body {
     gap: 60px;
 }
 
-.btn-login, .btn-registrar {
+.btn-login,
+.btn-registrar {
     font-size: 1.3rem;
     padding: 18px 60px;
     border-radius: 8px;
@@ -100,4 +102,45 @@ body {
 
 .btn-registrar:hover {
     background: #00cc22;
+}
+
+.form-control {
+    background: none;
+    color: white;
+    border: solid 0.1rem #00ff2a;
+    border-radius: 2rem;
+    width: 15rem;
+    height: 2rem;
+    padding: 0.5rem 5rem;
+}
+
+.form-control::placeholder {
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+.btn-success{
+    background: none;
+    border: solid 0.1rem #00ff2a;
+    border-radius: 2rem;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 9rem;
+    height: 2rem;
+    font-weight: bold;
+}
+
+.btn-secondary{
+    background: #00ff2a;
+    border: none;
+    border-radius: 2rem;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 9rem;
+    height: 2rem;
+    font-weight: bold;
 }

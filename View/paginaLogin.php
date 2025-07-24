@@ -1,6 +1,36 @@
 <?php
+session_start();
 
+require_once '../vendor/autoload.php';
+use Controller\ControllerUserR;
+
+$userName = 'Usuário Anônimo';
+$userEmail = 'email@exemplo.com';
+
+// Se veio email via GET, busca no banco
+if (isset($_GET['email']) && !empty($_GET['email'])) {
+    $userController = new ControllerUserR();
+    $user = $userController->checkUserByEmail($_GET['email']);
+
+    if ($user) {
+        $userName = $user['user_name'];   // ajuste para o nome do campo no seu banco
+        $userEmail = $user['user_email']; // ajuste para o nome do campo no seu banco
+    }
+} elseif (isset($_SESSION['registered_name'], $_SESSION['registered_email'])) {
+    // Se veio da tela de cadastro, usa os dados da sessão
+    $userName = $_SESSION['registered_name'];
+    $userEmail = $_SESSION['registered_email'];
+    unset($_SESSION['registered_name'], $_SESSION['registered_email']);
+}
+
+// Mascarar email
+$emailParts = explode('@', $userEmail);
+$maskedEmail = isset($emailParts[1])
+    ? substr($emailParts[0], 0, 2) . str_repeat('*', max(0, strlen($emailParts[0]) - 2)) . '@' . $emailParts[1]
+    : $userEmail;
 ?>
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -16,6 +46,8 @@
 </head>
 <body>
 <body>
+        <button class="back-btn" onclick="window.location.href='../register.php'">&#8592;</button>
+    
     <div class="d-flex flex-column justify-content-center align-items-center vh-100 vw-100 text-light">
         <!-- Logo maior, nome já incluso na imagem -->
         <div class="mb-5 text-center">
@@ -33,13 +65,13 @@
                 <div class="user-name" id="userName"><?php echo htmlspecialchars($userName ?? 'Usuário Anônimo'); ?></div>
                 <!-- Email do usuário com parte oculta -->
                 <div class="user-email" id="userEmail">
-                    <span class="masked-email"><?php echo htmlspecialchars($maskedEmail ?? '******'); ?></span><?php echo htmlspecialchars($userEmail ?? 'email@exemplo.com'); ?>
+                    <span class="masked-email"><?php echo htmlspecialchars($maskedEmail ?? '******'); ?></span>
                 </div>
                 <!-- Input para trocar email, oculto inicialmente -->
                 <input type="email" id="emailInput" class="form-control mt-2 d-none" placeholder="Digite outro email" aria-label="Trocar email" />
             </div>
             <!-- Link Trocar para abrir página de troca de email -->
-            <a href="email_switch.php" id="switchEmail" class="text-success fw-bold ms-3 text-decoration-none" target="_blank" rel="noopener noreferrer">Trocar</a>
+            <a href="../register.php" id="switchEmail" class="text-success fw-bold ms-3 text-decoration-none">Trocar</a>
         </div>
 
         <!-- Input de senha -->
@@ -77,10 +109,7 @@
     <!-- Bootstrap 5 JS Bundle (includes Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- JS personalizado -->
-<<<<<<< HEAD:View/paginaLogin.php
     <script src="../templates/js/script.js"></script>
-=======
     <script src="../templates/assets/js/script.js"></script>
->>>>>>> login:View/index.php
 </body>
 </html>

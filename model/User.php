@@ -45,17 +45,19 @@ public function registerUser($user_fullname, $email, $cpf, $password)
     public function getUserByEmail($email)
     {
         try {
-            $sql = "SELECT * FROM user WHERE email = :email LIMIT 1";
+        $sql = "SELECT * FROM user WHERE user_email = :email LIMIT 1";
 
-            $stmt = $this->Ns->prepare($sql);
+        $stmt = $this->Ns->prepare($sql);
 
-            $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+        $stmt->bindParam(":email", $email, PDO::PARAM_STR);
 
-            $stmt->execute();
+        $stmt->execute();
 
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $error) {
-        }
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $error) {
+        // Opcional: log de erro
+        return false;
+    }
     }
 
     // OBTER INFORMAÇÕES DO USUÁRIO
@@ -79,6 +81,12 @@ public function registerUser($user_fullname, $email, $cpf, $password)
             echo "Erro ao buscar informações: " . $error->getMessage();
             return false;
         }
+    }
+    public function getFirstUser() {
+        $sql = "SELECT * FROM user ORDER BY id ASC LIMIT 1";
+        $stmt = $this->Ns->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
 
