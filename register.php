@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once 'vendor/autoload.php'; // ajuste o caminho se necessário
+require_once 'vendor/autoload.php'; 
 use Controller\ControllerUserR;
 
 
@@ -11,11 +11,11 @@ if (isset($_GET['email']) && !empty($_GET['email'])) {
     $userEmail = $_GET['email'];
     $userController = new ControllerUserR();
     $user = $userController->getFirstUser();
-    $user = $userController->checkUserByEmail($userEmail); // Você precisa ter esse método no controller
+    $user = $userController->checkUserByEmail($userEmail);
 
     if ($user) {
-    $userName = $user['user_name'];   // ajuste para o nome do campo no seu banco
-    $userEmail = $user['user_email']; // ajuste para o nome do campo no seu banco
+    $userName = $user['user_name'];  
+    $userEmail = $user['user_email']; 
 } else {
     $userName = 'Usuário Anônimo';
     $userEmail = 'email@exemplo.com';
@@ -30,6 +30,12 @@ $emailParts = explode('@', $userEmail);
 $maskedEmail = isset($emailParts[1])
     ? substr($emailParts[0], 0, 2) . str_repeat('*', max(0, strlen($emailParts[0]) - 2)) . '@' . $emailParts[1]
     : $userEmail;
+
+// Mensagem de erro
+$errorMsg = '';
+if (isset($_GET['erro']) && $_GET['erro'] === 'email') {
+    $errorMsg = 'Email inválido!';
+}
 ?>
 
 <!DOCTYPE html>
@@ -53,6 +59,9 @@ $maskedEmail = isset($emailParts[1])
             <span class="highlight">o próximo é você</span>
         </div>
 <div class="buttons-area">
+     <?php if ($errorMsg): ?>
+        <div id="errorMsg" style="color:red; margin-bottom:10px;"><?php echo $errorMsg; ?></div>
+    <?php endif; ?>
     <button type="button" class="btn-login" id="showEmailInput">JÁ TENHO CONTA</button>
     <form action="View/paginaLogin.php" method="get" id="emailForm" style="display:none; margin-top:10px;">
     <div class="input-group">

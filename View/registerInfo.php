@@ -61,7 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input id="userEmail" name="user_email" type="email" placeholder="E-mail" required>
                 <input id="userCpf" name="user_cpf" type="text" placeholder="CPF" required>
                 <input id="userPassword" name="user_password" type="password" placeholder="Senha" required>
-                <input id="userConfirmPassword" name="userConfirmPassword" type="password" placeholder="Confirmar senha" required>
+                <input id="userConfirmPassword" name="userConfirmPassword" type="password" placeholder="Confirmar senha"
+                    required>
                 <button type="submit" class="btn-continuar">Continuar</button>
             </form>
         </div>
