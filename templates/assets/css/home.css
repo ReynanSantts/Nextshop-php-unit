@@ -71,10 +71,6 @@
     }
 
     .product-card .buy-btn {
-        display: block;
-        width: 100%;
-        margin-top: 0.5em;
-        padding: 0.5em 0;
         background: linear-gradient(90deg, #00ff00 0%, #009e4f 100%);
         color: #181818;
         font-family: 'Montserrat', Arial, sans-serif;
@@ -84,8 +80,8 @@
         border-radius: 0.75em;
         box-shadow: 0 2px 8px 0 rgba(0, 255, 0, 0.10);
         cursor: pointer;
-        letter-spacing: 0.03em;
         transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+        width: 9rem;
     }
 
     .product-card .buy-btn:hover {
@@ -213,6 +209,7 @@
     .product-card {
         background: rgba(24, 24, 24, 0.85);
         border-radius: 1.5rem;
+        align-items: center;
         box-shadow: 0 2px 16px 0 rgba(0, 255, 0, 0.10);
         transition: box-shadow 0.3s, background 0.3s, transform 0.2s;
         min-width: 180px;
@@ -236,7 +233,9 @@
         box-shadow: 0 2px 12px 0 rgba(0, 255, 0, 0.10);
         transition: box-shadow 0.3s;
         width: 9rem;
-        height: 9rem;
+        height: auto;
+        object-fit: contain;
+        aspect-ratio: 1 / 1;
     }
 
     .product-card:hover img {

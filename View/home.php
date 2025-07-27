@@ -89,10 +89,12 @@
         <section class="products-carousel d-flex gap-3 overflow-auto pb-3">
             <!-- Product Card -->
             <article class="product-card">
-                <img src="../templates/images/fonekqz.png" alt="Fone De Ouvido In-ear Kz Edx Pro retorno de palco"
+                <div class="position-relative d-flex justify-content-center align-items-center" style="height: 160px;">
+                    <img src="../templates/images/fonekqz.png" alt="Fone De Ouvido In-ear Kz Edx Pro retorno de palco"
                     class="img-fluid" style="max-height: 140px; object-fit: contain;" />
-                <span class="position-absolute top-0 end-0" title="Localização">
-                </span>
+                </div>
+                    <span class="position-absolute top-0 end-0" title="Localização">
+                        </span>
                 <div class="p-2 small lh-sm">
                     Fone De Ouvido In-ear Kz Edx Pro retorno de palco
                 </div>
@@ -104,7 +106,9 @@
             </article>
 
             <article class="product-card">
+                <div class="position-relative d-flex justify-content-center align-items-center" style="height: 160px;">
                 <img src="../templates/images/placa.jfif" alt="Vestido Midi Listrado Lima" class="img-fluid" />
+                </div>
                 <div class="p-2 small lh-sm fw-bold text-uppercase">
                     Placa de Vídeo RTX 4060 Ti Eagle OC Gigabyte NVIDIA GeForce, 8 GB GDDR6.
                 </div>
@@ -116,8 +120,10 @@
             </article>
 
             <article class="product-card">
+                <div class="position-relative d-flex justify-content-center align-items-center" style="height: 160px;">
                 <img src="../templates/images/tapete.png" alt="M.2 2280, SATA III 6GB/S, LEITURA 550MB/S"
                     class="img-fluid" />
+                    </div>
                 <div class="p-2 small lh-sm text-uppercase">
                     Tapete personalizado fluff peludo
                 </div>
@@ -129,7 +135,9 @@
             </article>
 
             <article class="product-card">
+                <div class="position-relative d-flex justify-content-center align-items-center" style="height: 160px;">
                 <img src="../templates/images/ryzen.jpg" alt="Processador ryzen 5500" class="img-fluid" />
+                </div>
                 <div class="p-2 small lh-sm text-uppercase">
                     Processador AMD Ryzen 5 5500,
                     6-Core, 12-Threads, 3.6GHz (4.2GHz Turbo), Cache 19MB, AM4
@@ -142,8 +150,10 @@
 
             <!-- Repeat products to match the image -->
             <article class="product-card">
+                <div class="position-relative d-flex justify-content-center align-items-center" style="height: 160px;">
                 <img src="../templates/images/fonekqz.png" alt="Fone De Ouvido In-ear Kz Edx Pro retorno de palco"
                     class="img-fluid" style="max-height: 140px; object-fit: contain;" />
+                    </div>
                 <span class="position-absolute top-0 end-0" title="Localização">
                 </span>
 
@@ -158,7 +168,9 @@
             </article>
 
             <article class="product-card">
+                <div class="position-relative d-flex justify-content-center align-items-center" style="height: 160px;">
                 <img src="../templates/images/Moletom.png" alt="Vestido Midi Listrado Lima" class="img-fluid" />
+                </div>
                 <div class="p-2 small lh-sm fw-bold text-uppercase">
                     Moletom casual moda roupas masculinas
                 </div>
@@ -169,8 +181,10 @@
             </article>
 
             <article class="product-card">
+                <div class="position-relative d-flex justify-content-center align-items-center" style="height: 160px;">
                 <img src="../templates/images/ssd.png" alt="M.2 2280, SATA III 6GB/S, LEITURA 550MB/S"
                     class="img-fluid" />
+                    </div>
                 <div class="p-2 small lh-sm text-uppercase">
                     M.2 2280, SATA III 6GB/S, LEITURA 550MB/S...
                 </div>
