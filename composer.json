@@ -6,13 +6,12 @@
         "psr-4": {
             "Reynan\\Nextshop\\": "src/",
             "Controller\\": "Controller/",
-             "Model\\": "Model/"
+            "Model\\": "Model/"
         }
     },
     "authors": [
         {
-            "name": "Spaceza",
-            "email": "raphaelssposito@gmail.com"
+            "name": "Reynan,Raphael,Luc"
         }
     ],
     "minimum-stability": "dev",
