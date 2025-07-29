@@ -1,36 +1,38 @@
 <?php
 // BUSCANDO E CARREGANDO O ARQUIVO AUTOLOAD
-require_once '../vendor/autoload.php';
+require_once '../vendor/autoload.php'; // Carrega classes automaticamente via Composer
 
-// IMPORTANDO O USERCONTROLLER
+// IMPORTANDO OS CONTROLLERS
 use Controller\ControllerUser;
 use Controller\ControllerUserR;
 
-$userController = new ControllerUserR();
+$userController = new ControllerUserR(); // Instancia o controller responsável pelo registro
 
-$registerUserMessage = '';
+$registerUserMessage = ''; // Variável para mensagens de sucesso/erro no cadastro
 
+// Se o formulário foi enviado via POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Verifica se os campos necessários foram enviados
     if (isset($_POST['user_name'], $_POST['user_email'], $_POST['user_cpf'], $_POST['user_password'])) {
+        // Recebe os dados do formulário
         $user_name = $_POST['user_name'];
         $user_email = $_POST['user_email'];
         $user_cpf = $_POST['user_cpf'];
         $user_password = $_POST['user_password'];
 
-        // USO DO CONTROLLER PARA VERIFICAÇÃO DE E-MAIL E CADASTRO DE USUÁRIO
-
-        // JÁ EXISTE UM E-MAIL CADASTRADO?
+        // Verifica se já existe um usuário cadastrado com esse email
         if ($userController->checkUserByEmail($user_email)) {
             $registerUserMessage = "Já existe um usuário cadastrado com esse endereço de e-mail.";
         } else {
-            // SE O E-MAIL JÁ EXISTE, CRIE O USUÁRIO
+            // Se email não existe, tenta criar um novo usuário
             if ($userController->createUser($user_name, $user_email, $user_cpf, $user_password)) {
-                // Salva nome e email na sessão
+                // Se cadastro foi sucesso, inicia a sessão
                 session_start();
-                $_SESSION['user_id'] = $newUser['user_id']; // Salva o ID na sessão
-                $_SESSION['registered_name'] = $user_name;
-                $_SESSION['registered_email'] = $user_email;
-                // REDIRECIONAR PARA UMA OUTRA PÁGINA, QUANDO O USUÁRIO FOR CADASTRADO
+                $_SESSION['user_id'] = $newUser['user_id']; // Salva o ID do usuário na sessão (atenção: $newUser não definido aqui!)
+                $_SESSION['registered_name'] = $user_name; // Salva nome na sessão
+                $_SESSION['registered_email'] = $user_email; // Salva email na sessão
+
+                // Redireciona para página de login após cadastro
                 header('Location: ../View/paginaLogin.php');
                 exit();
             } else {
@@ -40,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">

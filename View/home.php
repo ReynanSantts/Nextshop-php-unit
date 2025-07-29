@@ -1,30 +1,36 @@
 <?php
-session_start();
+session_start(); // Inicia a sessão para usar variáveis de sessão
 
-require_once '../vendor/autoload.php';
+require_once '../vendor/autoload.php'; // Carrega classes automaticamente via Composer
 
-use Controller\ControllerUserR;
-use Controller\ControllerProduct;
+use Controller\ControllerUserR; // Usa o controller de usuários
+use Controller\ControllerProduct; // Usa o controller de produtos
 
-// Conexão com o banco para produtos
+// Cria conexão PDO com o banco 'nextshop' no MySQL, usando UTF-8 e usuário root sem senha
 $pdo = new PDO('mysql:host=localhost;dbname=nextshop;charset=utf8', 'root', '');
-
+// Configura o PDO para lançar exceções em caso de erro
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// Pegar dados do usuário 
+// Cria uma instância do controller de usuários
 $userController = new ControllerUserR();
+// Pega o email do usuário armazenado na sessão (se existir)
 $userEmail = $_SESSION['user_email'] ?? null;
 $user = null;
+
+// Se email estiver setado, busca os dados do usuário no banco
 if ($userEmail) {
     $user = $userController->checkUserByEmail($userEmail);
 }
+// Pega o nome e email do usuário (se encontrado), ou deixa vazio
 $userName = $user['user_name'] ?? '';
 $userEmail = $user['user_email'] ?? '';
 
-// Pegar lista de produtos do banco
+// Cria uma instância do controller de produtos, passando a conexão PDO
 $productController = new ControllerProduct($pdo);
+// Busca todos os produtos para exibir/listar
 $products = $productController->listProducts();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-BR">

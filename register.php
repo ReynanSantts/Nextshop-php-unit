@@ -1,42 +1,43 @@
 <?php
-session_start();
+session_start(); // Inicia a sessão para usar variáveis de sessão
 
-require_once 'vendor/autoload.php'; 
-use Controller\ControllerUserR;
+require_once 'vendor/autoload.php'; // Carrega classes via Composer
+use Controller\ControllerUserR; // Usa o controller de usuário para registro
 
-
-
-// Se veio email via GET, busca no banco
+// Se o email veio via GET e não está vazio
 if (isset($_GET['email']) && !empty($_GET['email'])) {
-    $userEmail = $_GET['email'];
-    $userController = new ControllerUserR();
-    $user = $userController->getFirstUser();
-    $user = $userController->checkUserByEmail($userEmail);
+    $userEmail = $_GET['email']; // Pega o email da URL
+    $userController = new ControllerUserR(); // Instancia o controller
+    $user = $userController->getFirstUser(); // Busca o primeiro usuário (não usado depois?)
+    $user = $userController->checkUserByEmail($userEmail); // Busca usuário pelo email
 
     if ($user) {
-    $userName = $user['user_name'];  
-    $userEmail = $user['user_email']; 
-} else {
-    $userName = 'Usuário Anônimo';
-    $userEmail = 'email@exemplo.com';
-}
+        $userName = $user['user_name'];  // Pega nome do usuário
+        $userEmail = $user['user_email']; // Pega email do usuário
+    } else {
+        $userName = 'Usuário Anônimo'; // Caso usuário não encontrado
+        $userEmail = 'email@exemplo.com'; // Email padrão
+    }
 }
 
-// Mascarar email
+// Se a variável $userEmail não foi setada (ex: nenhum email veio via GET)
 if (!isset($userEmail)) {
-    $userEmail = 'email@exemplo.com';
+    $userEmail = 'email@exemplo.com'; // Define email padrão
 }
+
+// Máscara o email para exibir (ex: jo**@dominio.com)
 $emailParts = explode('@', $userEmail);
 $maskedEmail = isset($emailParts[1])
     ? substr($emailParts[0], 0, 2) . str_repeat('*', max(0, strlen($emailParts[0]) - 2)) . '@' . $emailParts[1]
     : $userEmail;
 
-// Mensagem de erro
+// Mensagem de erro para exibir se houver parâmetro 'erro=email' na URL
 $errorMsg = '';
 if (isset($_GET['erro']) && $_GET['erro'] === 'email') {
     $errorMsg = 'Email inválido!';
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">

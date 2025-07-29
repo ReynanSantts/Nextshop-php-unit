@@ -1,49 +1,60 @@
 <?php
-session_start();
+session_start(); // Inicia a sessão para usar variáveis de sessão
 
-require_once '../vendor/autoload.php';
-use Controller\ControllerUserR;
+require_once '../vendor/autoload.php'; // Carrega classes via Composer
+use Controller\ControllerUserR; // Usa o controller de usuário
 
-$userController = new ControllerUserR();
+$userController = new ControllerUserR(); // Instancia o controller
 
-$loginError = '';
-$user = null;
+$loginError = ''; // Variável para armazenar mensagens de erro no login
+$user = null; // Variável para armazenar dados do usuário
 
-// Se veio email via GET ou sessão, carrega usuário e preenche nome e email
+// Se não for requisição POST (ou seja, GET ou outro método)
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    // Verifica se o email veio via GET e não está vazio
     if (isset($_GET['email']) && !empty($_GET['email'])) {
+        // Busca usuário pelo email recebido
         $user = $userController->checkUserByEmail($_GET['email']);
+        // Se usuário não existir, redireciona para página de registro com erro
         if (!$user) {
             header('Location: ../register.php?erro=email');
             exit;
         }
+        // Se usuário encontrado, pega nome e email para exibir
         $userName = $user['user_name'];
         $userEmail = $user['user_email'];
-    } elseif (isset($_SESSION['registered_email'])) {
+    } 
+    // Se email do usuário estiver salvo na sessão (ex: após registro)
+    elseif (isset($_SESSION['registered_email'])) {
+        // Busca usuário pelo email salvo na sessão
         $user = $userController->checkUserByEmail($_SESSION['registered_email']);
         if ($user) {
             $userName = $user['user_name'];
             $userEmail = $user['user_email'];
         }
+        // Remove os dados temporários de registro da sessão
         unset($_SESSION['registered_name'], $_SESSION['registered_email']);
     }
 }
 
-// Ao receber POST, busque usuário pelo email enviado no formulário e valide a senha
+// Se for requisição POST (envio do formulário de login)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $password = $_POST['password'] ?? '';
-    $postedEmail = $_POST['email'] ?? null;
+    $password = $_POST['password'] ?? ''; // Pega senha enviada
+    $postedEmail = $_POST['email'] ?? null; // Pega email enviado
 
     if ($postedEmail) {
+        // Busca usuário pelo email
         $user = $userController->checkUserByEmail($postedEmail);
 
         if ($user) {
             $userName = $user['user_name'];
             $userEmail = $user['user_email'];
 
-            $hashedPassword = $user['user_password'] ?? ''; 
+            $hashedPassword = $user['user_password'] ?? ''; // Pega senha hash armazenada
 
+            // Verifica se a senha enviada bate com a senha armazenada (hash)
             if (password_verify($password, $hashedPassword)) {
+                // Se ok, salva dados do usuário na sessão e redireciona para home
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['user_email'] = $user['user_email'];
                 header('Location: home.php');
@@ -59,12 +70,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Mascarar email para exibir
+// Função para mascarar email para exibição (ex: jo**@dominio.com)
 $emailParts = explode('@', $userEmail);
 $maskedEmail = isset($emailParts[1])
     ? substr($emailParts[0], 0, 2) . str_repeat('*', max(0, strlen($emailParts[0]) - 2)) . '@' . $emailParts[1]
     : $userEmail;
 ?>
+
 
 
 <!DOCTYPE html>
