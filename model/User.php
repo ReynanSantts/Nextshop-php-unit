@@ -25,12 +25,13 @@ public function registerUser($user_fullname, $email, $cpf, $password)
         $sql = 'INSERT INTO user (user_name, user_email, user_cpf, user_password, created_at) VALUES (:user_name, :user_email, :user_cpf, :user_password, NOW())';
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $hashedCpf = hash('sha256', $cpf);
 
         $stmt = $this->Ns->prepare($sql);
 
         $stmt->bindParam(":user_name", $user_fullname, PDO::PARAM_STR);
         $stmt->bindParam(":user_email", $email, PDO::PARAM_STR);
-        $stmt->bindParam(":user_cpf", $cpf, PDO::PARAM_STR);
+        $stmt->bindParam(":user_cpf", $hashedCpf, PDO::PARAM_STR);
         $stmt->bindParam(":user_password", $hashedPassword, PDO::PARAM_STR);
 
         return $stmt->execute();

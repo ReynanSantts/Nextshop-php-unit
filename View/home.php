@@ -20,8 +20,6 @@ if ($userEmail) {
 }
 $userName = $user['user_name'] ?? '';
 $userEmail = $user['user_email'] ?? '';
-$userCpf = $user['user_cpf'] ?? '';
-$userPassword = isset($user['user_password']) ? '********' : '';
 
 // Pegar lista de produtos do banco
 $productController = new ControllerProduct($pdo);
@@ -81,8 +79,8 @@ $products = $productController->listProducts();
             <h3>Perfil do Usuário</h3>
             <p><strong>Nome:</strong> <?php echo htmlspecialchars($userName ?? ''); ?></p>
             <p><strong>Email:</strong> <?php echo htmlspecialchars($userEmail ?? ''); ?></p>
-            <p><strong>CPF:</strong> <?php echo htmlspecialchars($userCpf ?? ''); ?></p>
-            <p><strong>Senha:</strong> ********</p>
+            <p><strong>CPF:</strong> ********** </p>
+            <p><strong>Senha:</strong> ********* </p>
         </div>
     </div>
     <script src="../templates/js/PopUpPerfil.js"></script>

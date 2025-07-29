@@ -23,5 +23,9 @@ class ControllerProduct
         return $this->model->getProductById($id);
     }
 
-    // Outras funções para criar, atualizar, deletar produtos podem ser aqui
+    // Método para inserir produto (para o finalizarPagamento.php)
+    public function addProduct($name, $price, $image)
+    {
+        return $this->model->addProduct($name, $price, $image);
+    }
 }

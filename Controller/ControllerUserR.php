@@ -43,7 +43,6 @@ class ControllerUserR
             $_SESSION['id'] = $user['id'];
             $_SESSION['user_name'] = $user['user_name'];
             $_SESSION['user_email'] = $user['user_email'];
-            var_dump($_SESSION);
             return true;
         }
         return false;
