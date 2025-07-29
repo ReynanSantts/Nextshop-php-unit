@@ -1,4 +1,4 @@
-    /* Fontes e tipografia moderna */
+/* Fontes e tipografia moderna */
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;600;700&display=swap');
 
     body,
@@ -49,29 +49,118 @@
     width: 100vw;
     height: 100vh;
     background: rgba(0,0,0,0.7);
-    justify-content: center;
-    align-items: center;
 }
 
 .perfil-popup-content {
+    position: fixed;      
+    top: 90px;            
+    right: 90px;          
     background: #232323;
     color: #00ff00;
     padding: 2rem;
     border-radius: 1rem;
     min-width: 300px;
     max-width: 90vw;
-    box-shadow: 0 4px 32px rgba(0,255,0,0.25);
-    position: relative;
     text-align: left;
 }
 
 .close-popup {
     position: absolute;
     top: 1rem;
+    right: 0.5rem;
+    font-size: 2rem;
+    color: #00ff00;
+    cursor: pointer;
+}
+/*Popup carrinho */
+.cart-popup {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.7);
+}
+
+.cart-popup-content {
+    position: fixed;      
+    top: 90px;            
+    right: 90px;          
+    background: #232323;
+    color: #00ff00;
+    padding: 2rem;
+    border-radius: 1rem;
+    min-width: 300px;
+    max-width: 90vw;
+    text-align: left;
+}
+
+.close-popup-cart {
+    position: absolute;
+    top: 1rem;
     right: 1rem;
     font-size: 2rem;
     color: #00ff00;
     cursor: pointer;
+}
+
+    /* Popup Sair */
+.sair-popup {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.7);
+}
+
+.sair-popup-content {
+    position: fixed;
+    top: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #232323;
+    color: #00ff00;
+    padding: 2rem;
+    border-radius: 1rem;
+    min-width: 300px;
+    max-width: 90vw;
+    text-align: center;
+}
+
+.close-sair-popup {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    color: #00ff00;
+    cursor: pointer;
+}
+
+.sair-btn {
+    background: linear-gradient(90deg, #00ff00 0%, #009e4f 100%);
+    color: #181818;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1.08rem;
+    border: none;
+    border-radius: 0.75em;
+    box-shadow: 0 2px 8px 0 rgba(0, 255, 0, 0.10);
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    width: 9rem;
+    margin-top: 1rem;
+}
+
+.sair-btn:hover {
+    background: linear-gradient(90deg, #009e4f 0%, #00ff00 100%);
+    color: #fff;
+    box-shadow: 0 4px 16px 0 rgba(0, 255, 0, 0.18);
+    transform: scale(1.04);
 }
 
     .category-item small {

@@ -1,6 +1,33 @@
 <?php
+session_start();
 
+require_once '../vendor/autoload.php';
+
+use Controller\ControllerUserR;
+use Controller\ControllerProduct;
+
+// Conexão com o banco para produtos
+$pdo = new PDO('mysql:host=localhost;dbname=nextshop;charset=utf8', 'root', '');
+
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+// Pegar dados do usuário 
+$userController = new ControllerUserR();
+$userEmail = $_SESSION['user_email'] ?? null;
+$user = null;
+if ($userEmail) {
+    $user = $userController->checkUserByEmail($userEmail);
+}
+$userName = $user['user_name'] ?? '';
+$userEmail = $user['user_email'] ?? '';
+$userCpf = $user['user_cpf'] ?? '';
+$userPassword = isset($user['user_password']) ? '********' : '';
+
+// Pegar lista de produtos do banco
+$productController = new ControllerProduct($pdo);
+$products = $productController->listProducts();
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -38,7 +65,7 @@
             </div>
         </form>
         <div class="header-right">
-            <a href="#" class="cart-link" aria-label="Carrinho de compras">
+            <a href="#" id="openCartPopup" class="cart-link" aria-label="Carrinho de compras">
                 <i class="bi bi-cart3"></i>
             </a>
             <a href="#" class="user-link" aria-label="Perfil do usuário" id="openPerfilPopup">
@@ -47,25 +74,47 @@
         </div>
     </header>
 
-    <!-- Modal Perfil do Usuário -->
-    <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content bg-dark text-light">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="perfilModalLabel">Perfil do Usuário</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Fechar"></button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Nome:</strong> <?php echo htmlspecialchars($userName ?? ''); ?></p>
-                    <p><strong>Email:</strong> <?php echo htmlspecialchars($userEmail ?? ''); ?></p>
-                    <p><strong>CPF:</strong> <?php echo htmlspecialchars($userCpf ?? ''); ?></p>
-                    <p><strong>Senha:</strong> ********</p>
-                </div>
-            </div>
+    <!-- Popup Perfil do Usuário -->
+    <div id="perfilPopup" class="perfil-popup">
+        <div class="perfil-popup-content">
+            <span class="close-popup" id="closePerfilPopup"> &times;</span>
+            <h3>Perfil do Usuário</h3>
+            <p><strong>Nome:</strong> <?php echo htmlspecialchars($userName ?? ''); ?></p>
+            <p><strong>Email:</strong> <?php echo htmlspecialchars($userEmail ?? ''); ?></p>
+            <p><strong>CPF:</strong> <?php echo htmlspecialchars($userCpf ?? ''); ?></p>
+            <p><strong>Senha:</strong> ********</p>
         </div>
     </div>
-<script src="../templates/js/PopUpPerfil.js"></script>
+    <script src="../templates/js/PopUpPerfil.js"></script>
+
+    <!-- Popup Sair -->
+    <div id="sairPopup" class="sair-popup">
+        <div class="sair-popup-content">
+            <span class="close-sair-popup" id="closeSairPopup">&times;</span>
+            <h3>Deseja sair?</h3>
+            <button id="btnSair" class="sair-btn">Sair</button>
+        </div>
+    </div>
+
+    <script src="../templates/js/PopUpSair.js"></script>
+
+    <!-- Popup do Carrinho -->
+    <div id="CartPopup" class="cart-popup">
+  <div class="cart-popup-content">
+    <span class="close-popup-cart" id="closeCartPopup"> &times;</span>
+    <h3>Carrinho</h3>
+    <div class="cart-items">
+      <!-- Produtos adicionados aparecerão aqui -->
+    </div>
+    <div class="cart-total" style="margin-top: 10px; font-weight: bold;">
+      Total: R$ <span id="totalPrice">0.00</span>
+    </div>
+    <button id="checkoutBtn" style="margin-top: 15px; padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">
+      Finalizar Pagamento
+    </button>
+  </div>
+</div>
+    <script src="../templates/js/PopUpCart.js"></script>
     <!-- Main Content -->
     <main class="bg-dark text-white p-3 p-md-5">
         <!-- Banner CTA -->
@@ -75,7 +124,7 @@
             <button class="cta-btn">Ver Ofertas</button>
         </section>
         <section class="banner mb-4 rounded-3">
-            <img src="../templates/images/banner.jpg" alt="Banner" class="img-fluid w-100 rounded-3" />
+            <img src="../templates/images/banner.png" alt="Banner" class="img-fluid w-100 rounded-3" />
         </section>
 
         <!-- Categories -->
@@ -123,13 +172,15 @@
                 <div class="px-2 pb-2">
                     <span class="price">R$ 32</span><br />
                     <small class="text-muted">12x R$ 4,55</small>
-                    <button class="buy-btn">Comprar</button>
+                    <button class="buy-btn" data-name="Fone De Ouvido In-ear Kz Edx Pro"
+                        data-price="32" data-image="../templates/images/fonekqz.png">Comprar</button>
+
                 </div>
             </article>
 
             <article class="product-card">
                 <div class="position-relative d-flex justify-content-center align-items-center" style="height: 160px;">
-                    <img src="../templates/images/placa.jfif" alt="Vestido Midi Listrado Lima" class="img-fluid" />
+                    <img src="../templates/images/placa.png" alt="Vestido Midi Listrado Lima" class="img-fluid" />
                 </div>
                 <div class="p-2 small lh-sm fw-bold text-uppercase">
                     Placa de Vídeo RTX 4060 Ti Eagle OC Gigabyte NVIDIA GeForce, 8 GB GDDR6.
@@ -137,7 +188,8 @@
                 <div class="px-2 pb-2">
                     <span class="price">R$ 2.499,99</span><br />
                     <small class="text-muted">10x de R$ 277,77</small>
-                    <button class="buy-btn">Comprar</button>
+                    <button class="buy-btn" data-name="Placa de Vídeo RTX 4060 Ti Eagle OC Gigabyte NVIDIA GeForce"
+                        data-price="2499.99"  data-image="../templates/images/placa.png">Comprar</button>
                 </div>
             </article>
 
@@ -152,13 +204,14 @@
                 <div class="px-2 pb-2">
                     <span class="price">R$ 124,99</span><br />
                     <small class="text-muted">3x de R$42,91</small>
-                    <button class="buy-btn">Comprar</button>
+                    <button class="buy-btn" data-name="Tapete personalizado fluff peludo"
+                        data-price="124.99"  data-image="../templates/images/tapete.png">Comprar</button>
                 </div>
             </article>
 
             <article class="product-card">
                 <div class="position-relative d-flex justify-content-center align-items-center" style="height: 160px;">
-                    <img src="../templates/images/ryzen.jpg" alt="Processador ryzen 5500" class="img-fluid" />
+                    <img src="../templates/images/ryzen.png" alt="Processador ryzen 5500" class="img-fluid" />
                 </div>
                 <div class="p-2 small lh-sm text-uppercase">
                     Processador AMD Ryzen 5 5500,
@@ -168,7 +221,8 @@
                 <div class="px-2 pb-2">
                     <span class="price">R$ 489,99</span><br />
                     <small class="text-muted">12x de R$ 48,04</small>
-                    <button class="buy-btn">Comprar</button>
+                    <button class="buy-btn" data-name="Processador AMD Ryzen 5 5500, 6-Core, 12-Threads, AM4"
+                        data-price="489.99"  data-image="../templates/images/ryzen.png">Comprar</button>
                 </div>
             </article>
 
@@ -187,7 +241,8 @@
                 <div class="px-2 pb-2">
                     <span class="price">R$ 379,99</span><br />
                     <small class="text-muted">5x de R$ 80,00</small>
-                    <button class="buy-btn">Comprar</button>
+                    <button class="buy-btn" data-name="Tênis Nike Air Max Excee 365 Masculino"
+                        data-price="379.99"  data-image="../templates/images/tenis.png">Comprar</button>
                 </div>
             </article>
 
@@ -201,7 +256,8 @@
                 <div class="px-2 pb-2">
                     <span class="price">R$ 275,49 </span><br />
                     <small class="text-muted">4x de R$ 72,50</small>
-                    <button class="buy-btn">Comprar</button>
+                    <button class="buy-btn" data-name="Moletom casual moda roupas masculinas"
+                        data-price="275.49"  data-image="../templates/images/moletom.png">Comprar</button>
                 </div>
             </article>
 
@@ -216,7 +272,8 @@
                 <div class="px-2 pb-2">
                     <span class="price">R$ 159,99</span><br />
                     <small class="text-muted">9x R$ 19,32</small>
-                    <button class="buy-btn">Comprar</button>
+                    <button class="buy-btn" data-name="M.2 2280, SATA III 6GB/S, LEITURA 550MB/S"
+                        data-price="159.99"  data-image="../templates/images/ssd.png">Comprar</button>
                 </div>
             </article>
         </section>
@@ -234,6 +291,7 @@
 
     <!-- Bootstrap Bundle JS (includes Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../templates/js/database.js"></script>
 </body>
 
 </html>

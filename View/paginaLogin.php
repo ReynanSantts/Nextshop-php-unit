@@ -6,8 +6,6 @@ use Controller\ControllerUserR;
 
 $userController = new ControllerUserR();
 
-$userName = 'Usuário Anônimo';
-$userEmail = 'email@exemplo.com';
 $loginError = '';
 $user = null;
 
@@ -35,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
     $postedEmail = $_POST['email'] ?? null;
-    var_dump($password);
 
     if ($postedEmail) {
         $user = $userController->checkUserByEmail($postedEmail);
@@ -44,10 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $userName = $user['user_name'];
             $userEmail = $user['user_email'];
 
-            $hashedPassword = $user['user_password'] ?? '';
-            var_dump(password_verify($password, $user['user_password']));
+            $hashedPassword = $user['user_password'] ?? ''; 
+
             if (password_verify($password, $hashedPassword)) {
                 $_SESSION['user_id'] = $user['user_id'];
+                $_SESSION['user_email'] = $user['user_email'];
                 header('Location: home.php');
                 exit;
             } else {
