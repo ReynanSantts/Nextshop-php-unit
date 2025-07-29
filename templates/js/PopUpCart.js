@@ -101,39 +101,41 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Faz requisição POST para o PHP que finaliza o pagamento, enviando os itens como JSON
-    fetch('../Controller/finalizarPagamento.php', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items }),
-    })
-    .then(res => {
-      // Lê a resposta como texto (para debug) e tenta fazer parse JSON
-      return res.text().then(text => {
-        console.log('Resposta bruta do servidor:', text);
-        try {
-          return JSON.parse(text);
-        } catch (err) {
-          console.error('Erro ao fazer parse do JSON:', err);
-          throw err;
-        }
-      })
-    })
-    .then(data => {
-      // Se sucesso, mostra mensagem, limpa carrinho e fecha popup
-      if (data.success) {
-        alert('Pagamento finalizado com sucesso! Obrigado pela compra.');
-        cartItemsContainer.innerHTML = '';
-        updateTotal();
-        closePopup();
-      } else {
-        // Se erro, mostra mensagem retornada do servidor
-        alert('Erro ao finalizar o pagamento: ' + (data.message || ''));
-      }
-    })
-    .catch((error) => {
-      // Se falha na requisição, avisa o usuário
-      alert('Erro na comunicação com o servidor: ' + error.message);
+// Faz requisição POST para o PHP que finaliza o pagamento, enviando os itens como JSON
+fetch('../Controller/finalizarPagamento.php', {
+  method: 'POST', // Usa método POST para enviar dados com segurança e não via URL
+  headers: { 'Content-Type': 'application/json' }, // Define o cabeçalho informando que o corpo da requisição é JSON
+  body: JSON.stringify({ items }), // Transforma o objeto JavaScript 'items' em string JSON para enviar ao servidor
+})
+.then(res => {
+  // Lê a resposta como texto para facilitar debug, já que às vezes o servidor pode enviar algo inválido
+  return res.text().then(text => {
+    console.log('Resposta bruta do servidor:', text); // Mostra a resposta bruta no console
+    try {
+      // Tenta transformar o texto recebido em objeto JSON para manipular no JS
+      return JSON.parse(text);
+    } catch (err) {
+      // Caso o texto não seja um JSON válido, mostra o erro no console e lança exceção para tratar depois
+      console.error('Erro ao fazer parse do JSON:', err);
+      throw err;
+    }
+  })
+})
+.then(data => {
+  // Se o servidor retornou sucesso, mostra mensagem, limpa o carrinho e fecha popup
+  if (data.success) {
+    alert('Pagamento finalizado com sucesso! Obrigado pela compra.');
+    cartItemsContainer.innerHTML = ''; // Remove todos os itens do carrinho
+    updateTotal(); // Atualiza o total (zerando)
+    closePopup(); // Fecha o popup do carrinho
+  } else {
+    // Se o servidor retornou erro, mostra a mensagem recebida
+    alert('Erro ao finalizar o pagamento: ' + (data.message || ''));
+  }
+})
+.catch((error) => {
+  // Caso a requisição falhe (ex: servidor off, erro de rede), mostra alerta ao usuário
+  alert('Erro na comunicação com o servidor: ' + error.message);
     });
   });
 });
