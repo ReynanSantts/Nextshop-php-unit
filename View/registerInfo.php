@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($userController->createUser($user_name, $user_email, $user_cpf, $user_password)) {
                 // Salva nome e email na sessão
                 session_start();
+                $_SESSION['user_id'] = $newUser['user_id']; // Salva o ID na sessão
                 $_SESSION['registered_name'] = $user_name;
                 $_SESSION['registered_email'] = $user_email;
                 // REDIRECIONAR PARA UMA OUTRA PÁGINA, QUANDO O USUÁRIO FOR CADASTRADO

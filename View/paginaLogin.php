@@ -116,9 +116,9 @@ $maskedEmail = isset($emailParts[1])
                         placeholder="Digite outro email" aria-label="Trocar email" />
                 </div>
                 <!-- Link Trocar para abrir página de troca de email -->
-                <a href="../register.php" id="switchEmail"
-                    class="text-success fw-bold ms-3 text-decoration-none">Trocar</a>
+                <a id="switchEmail" class="text-success fw-bold ms-3 text-decoration-none" style="cursor:Pointer;">Trocar</a>
             </div>
+            <script src="../templates/js/login.js"></script>
 
             <!-- Input de senha -->
             <?php if (!empty($loginError)): ?>

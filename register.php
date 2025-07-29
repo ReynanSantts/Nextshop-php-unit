@@ -62,6 +62,7 @@ if (isset($_GET['erro']) && $_GET['erro'] === 'email') {
      <?php if ($errorMsg): ?>
         <div id="errorMsg" style="color:red; margin-bottom:10px;"><?php echo $errorMsg; ?></div>
     <?php endif; ?>
+    
     <button type="button" class="btn-login" id="showEmailInput">JÁ TENHO CONTA</button>
     <form action="View/paginaLogin.php" method="get" id="emailForm" style="display:none; margin-top:10px;">
     <div class="input-group">
