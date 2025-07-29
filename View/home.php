@@ -41,12 +41,31 @@
             <a href="#" class="cart-link" aria-label="Carrinho de compras">
                 <i class="bi bi-cart3"></i>
             </a>
-            <a href="#" class="user-link" aria-label="Perfil do usuário">
+            <a href="#" class="user-link" aria-label="Perfil do usuário" id="openPerfilPopup">
                 <i class="bi bi-person-circle"></i>
             </a>
         </div>
     </header>
 
+    <!-- Modal Perfil do Usuário -->
+    <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="perfilModalLabel">Perfil do Usuário</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Nome:</strong> <?php echo htmlspecialchars($userName ?? ''); ?></p>
+                    <p><strong>Email:</strong> <?php echo htmlspecialchars($userEmail ?? ''); ?></p>
+                    <p><strong>CPF:</strong> <?php echo htmlspecialchars($userCpf ?? ''); ?></p>
+                    <p><strong>Senha:</strong> ********</p>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="../templates/js/PopUpPerfil.js"></script>
     <!-- Main Content -->
     <main class="bg-dark text-white p-3 p-md-5">
         <!-- Banner CTA -->
@@ -94,10 +113,10 @@
             <article class="product-card">
                 <div class="position-relative d-flex justify-content-center align-items-center" style="height: 160px;">
                     <img src="../templates/images/fonekqz.png" alt="Fone De Ouvido In-ear Kz Edx Pro retorno de palco"
-                    class="img-fluid" style="max-height: 140px; object-fit: contain;" />
+                        class="img-fluid" style="max-height: 140px; object-fit: contain;" />
                 </div>
-                    <span class="position-absolute top-0 end-0" title="Localização">
-                        </span>
+                <span class="position-absolute top-0 end-0" title="Localização">
+                </span>
                 <div class="p-2 small lh-sm">
                     Fone De Ouvido In-ear Kz Edx Pro retorno de palco
                 </div>
@@ -110,7 +129,7 @@
 
             <article class="product-card">
                 <div class="position-relative d-flex justify-content-center align-items-center" style="height: 160px;">
-                <img src="../templates/images/placa.jfif" alt="Vestido Midi Listrado Lima" class="img-fluid" />
+                    <img src="../templates/images/placa.jfif" alt="Vestido Midi Listrado Lima" class="img-fluid" />
                 </div>
                 <div class="p-2 small lh-sm fw-bold text-uppercase">
                     Placa de Vídeo RTX 4060 Ti Eagle OC Gigabyte NVIDIA GeForce, 8 GB GDDR6.
@@ -124,9 +143,9 @@
 
             <article class="product-card">
                 <div class="position-relative d-flex justify-content-center align-items-center" style="height: 160px;">
-                <img src="../templates/images/tapete.png" alt="M.2 2280, SATA III 6GB/S, LEITURA 550MB/S"
-                    class="img-fluid" />
-                    </div>
+                    <img src="../templates/images/tapete.png" alt="M.2 2280, SATA III 6GB/S, LEITURA 550MB/S"
+                        class="img-fluid" />
+                </div>
                 <div class="p-2 small lh-sm text-uppercase">
                     Tapete personalizado fluff peludo
                 </div>
@@ -139,16 +158,16 @@
 
             <article class="product-card">
                 <div class="position-relative d-flex justify-content-center align-items-center" style="height: 160px;">
-                <img src="../templates/images/ryzen.jpg" alt="Processador ryzen 5500" class="img-fluid" />
+                    <img src="../templates/images/ryzen.jpg" alt="Processador ryzen 5500" class="img-fluid" />
                 </div>
                 <div class="p-2 small lh-sm text-uppercase">
                     Processador AMD Ryzen 5 5500,
                     6-Core, 12-Threads, AM4
-                    
+
                 </div>
                 <div class="px-2 pb-2">
                     <span class="price">R$ 489,99</span><br />
-                     <small class="text-muted">12x de R$ 48,04</small>
+                    <small class="text-muted">12x de R$ 48,04</small>
                     <button class="buy-btn">Comprar</button>
                 </div>
             </article>
@@ -156,9 +175,9 @@
             <!-- Repeat products to match the image -->
             <article class="product-card">
                 <div class="position-relative d-flex justify-content-center align-items-center" style="height: 160px;">
-                <img src="../templates/images/tenis.png" alt="Tênis Nike Air Max Excee 365 Masculino"
-                    class="img-fluid" style="max-height: 140px; object-fit: contain;" />
-                    </div>
+                    <img src="../templates/images/tenis.png" alt="Tênis Nike Air Max Excee 365 Masculino"
+                        class="img-fluid" style="max-height: 140px; object-fit: contain;" />
+                </div>
                 <span class="position-absolute top-0 end-0" title="Localização">
                 </span>
 
@@ -174,7 +193,7 @@
 
             <article class="product-card">
                 <div class="position-relative d-flex justify-content-center align-items-center" style="height: 160px;">
-                <img src="../templates/images/Moletom.png" alt="Vestido Midi Listrado Lima" class="img-fluid" />
+                    <img src="../templates/images/Moletom.png" alt="Vestido Midi Listrado Lima" class="img-fluid" />
                 </div>
                 <div class="p-2 small lh-sm fw-bold text-uppercase">
                     Moletom casual moda roupas masculinas
@@ -188,9 +207,9 @@
 
             <article class="product-card">
                 <div class="position-relative d-flex justify-content-center align-items-center" style="height: 160px;">
-                <img src="../templates/images/ssd.png" alt="M.2 2280, SATA III 6GB/S, LEITURA 550MB/S"
-                    class="img-fluid" />
-                    </div>
+                    <img src="../templates/images/ssd.png" alt="M.2 2280, SATA III 6GB/S, LEITURA 550MB/S"
+                        class="img-fluid" />
+                </div>
                 <div class="p-2 small lh-sm text-uppercase">
                     M.2 2280, SATA III 6GB/S, LEITURA 550MB/S...
                 </div>
