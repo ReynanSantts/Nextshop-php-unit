@@ -30,15 +30,16 @@ class ModelProduct
         return $stmt->fetch(PDO::FETCH_ASSOC); // Retorna o produto encontrado (ou false se não achar)
     }
 
-    // Inserir um novo produto com nome, preço e imagem
-    public function addProduct($name, $price, $image)
-    {
-        $stmt = $this->pdo->prepare("INSERT INTO produtos (name, price, image) VALUES (:name, :price, :image)"); // Prepara INSERT
-        $stmt->bindValue(':name', $name); // Liga o nome ao placeholder
-        $stmt->bindValue(':price', $price); // Liga o preço
-        $stmt->bindValue(':image', $image); // Liga a imagem
-        return $stmt->execute(); // Executa o insert e retorna true se sucesso
-    }
+    // Inserir um novo produto com nome, preço, imagem, qtd
+public function addProduct($name, $price, $image, $qtd)
+{
+    $stmt = $this->pdo->prepare("INSERT INTO produtos (name, price, image, qtd) VALUES (:name, :price, :image, :qtd)");
+    $stmt->bindValue(':name', $name);
+    $stmt->bindValue(':price', $price);
+    $stmt->bindValue(':image', $image);
+    $stmt->bindValue(':qtd', $qtd, PDO::PARAM_INT);
+    return $stmt->execute();
+}
 
     // Atualizar produto existente pelo id, alterando nome, preço e imagem
     public function updateProduct($id, $name, $price, $image)
@@ -59,7 +60,7 @@ class ModelProduct
         return $stmt->execute(); // Executa e retorna sucesso/falha
     }
 
-    // ✅ NOVO MÉTODO: Salvar vários produtos comprados (ex: no checkout)
+    // Salvar vários produtos comprados (ex: no checkout)
     // Recebe array de itens, insere um por um na tabela produtos
     public function savePurchasedProducts(array $items): bool
     {

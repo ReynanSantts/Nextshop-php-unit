@@ -32,11 +32,12 @@ try {
         $name = $item['name'] ?? '';
         $price = $item['price'] ?? 0;
         $image = $item['image'] ?? '';
+        $qtd = $item['qtd'] ?? 1 ;
 
         // Só tenta adicionar se nome não vazio e preço maior que zero
         if ($name !== '' && $price > 0) {
             // Chama método para adicionar produto (deve existir no ControllerProduct)
-            $controller->addProduct($name, $price, $image);
+            $controller->addProduct($name, $price, $image, $qtd);
         }
     }
 

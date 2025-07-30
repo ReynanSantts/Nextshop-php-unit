@@ -27,8 +27,8 @@ class ControllerProduct
     }
 
     // Método para inserir um produto (usado no finalizarPagamento.php)
-    public function addProduct($name, $price, $image)
+    public function addProduct($name, $price, $image, $qtd)
     {
-        return $this->model->addProduct($name, $price, $image);
+        return $this->model->addProduct($name, $price, $image, $qtd);
     }
 }
