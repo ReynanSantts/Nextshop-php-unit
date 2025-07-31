@@ -42,15 +42,16 @@ public function addProduct($name, $price, $image, $qtd)
 }
 
     // Atualizar produto existente pelo id, alterando nome, preço e imagem
-    public function updateProduct($id, $name, $price, $image)
-    {
-        $stmt = $this->pdo->prepare("UPDATE produtos SET name = :name, price = :price, image = :image WHERE id = :id"); // Prepara UPDATE
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT); // Liga id
-        $stmt->bindValue(':name', $name); // Liga nome
-        $stmt->bindValue(':price', $price); // Liga preço
-        $stmt->bindValue(':image', $image); // Liga imagem
-        return $stmt->execute(); // Executa e retorna sucesso/falha
-    }
+public function updateProduct($id, $name, $price, $image, $qtd)
+{
+    $stmt = $this->pdo->prepare("UPDATE produtos SET name = :name, price = :price, image = :image, qtd = :qtd WHERE id = :id");
+    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+    $stmt->bindValue(':name', $name);
+    $stmt->bindValue(':price', $price);
+    $stmt->bindValue(':image', $image);
+    $stmt->bindValue(':qtd', $qtd, PDO::PARAM_INT);
+    return $stmt->execute();
+}
 
     // Deletar produto pelo id
     public function deleteProduct($id)
