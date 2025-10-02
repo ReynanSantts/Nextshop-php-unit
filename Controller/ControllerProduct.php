@@ -8,10 +8,10 @@ class ControllerProduct
 {
     private $model; // Propriedade para armazenar a instância do model
 
-    // Construtor recebe a conexão PDO e cria o model
-    public function __construct(PDO $pdo)
+    // Construtor modificado para aceitar injeção do model
+    public function __construct(PDO $pdo, ModelProduct $model = null)
     {
-        $this->model = new ModelProduct($pdo);
+        $this->model = $model ?: new ModelProduct($pdo);
     }
 
     // Método para listar todos os produtos, chamando o método do model
