@@ -7,7 +7,10 @@
             "Reynan\\Nextshop\\": "src/",
             "Controller\\": "Controller/",
             "Model\\": "Model/"
-        }
+        },
+        "classmap": [
+            "Controller/"
+        ]
     },
     "authors": [
         {
@@ -15,5 +18,7 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require-dev": {
+        "phpunit/phpunit": "12"
+    }
 }
