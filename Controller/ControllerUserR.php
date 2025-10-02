@@ -9,23 +9,20 @@ class ControllerUserR
 {
     private $userModel;
 
-    public function __construct()
+    // CONSTRUTOR MODIFICADO para injeção de dependência
+    public function __construct(User $userModel = null)
     {
-        $this->userModel = new User();
+        $this->userModel = $userModel ?: new User();
     }
 
     // REGISTRO DE USUÁRIO
     public function createUser($user_name, $user_email, $user_cpf, $user_password)
     {
-
         if (empty($user_name) or empty($user_email) or empty($user_cpf) or empty($user_password)) {
             return false;
         }
 
-        // $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
         return $this->userModel->registerUser($user_name, $user_email, $user_cpf, $user_password);
-
     }
 
     // E-MAIL JÁ CADASTRADO?
@@ -34,15 +31,17 @@ class ControllerUserR
          return $this->userModel->getUserByEmail($user_email);
     }
 
-    // LOGIN DE USUÁRIO
-    public function login($user_email, $user_password)
+    // LOGIN DE USUÁRIO - ATUALIZADO
+    public function login($email, $password)
     {
-        $user = $this->userModel->getUserByEmail($user_email);
+        $user = $this->userModel->getUserByEmail($email);
 
-        if ($user && password_verify($user_password, $user['password'])) {
+        if ($user && password_verify($password, $user['password'])) {
             $_SESSION['id'] = $user['id'];
-            $_SESSION['user_name'] = $user['user_name'];
-            $_SESSION['user_email'] = $user['user_email'];
+            $_SESSION['user_fullname'] = $user['user_name']; // Novo campo para testes
+            $_SESSION['user_name'] = $user['user_name'];     // Mantido para compatibilidade
+            $_SESSION['email'] = $user['user_email'];        // Novo campo para testes  
+            $_SESSION['user_email'] = $user['user_email'];   // Mantido para compatibilidade
             return true;
         }
         return false;
@@ -59,10 +58,8 @@ class ControllerUserR
     {
         return $this->userModel->getUserInfo($id, $user_name, $user_email);
     }
+
     public function getFirstUser() {
-    return $this->userModel->getFirstUser();
-}
-
-}
-
-?>
+        return $this->userModel->getFirstUser();
+    }
+} 
