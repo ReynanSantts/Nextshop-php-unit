@@ -3,6 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use Controller\ControllerUserR;
 use Model\User;
+require_once 'TestTracker.php';
 
 class UserTest extends TestCase
 {

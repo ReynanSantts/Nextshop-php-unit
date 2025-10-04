@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use Controller\ControllerProduct;
 use Model\ModelProduct;
-use PDO;
+require_once 'TestTracker.php';
 
 class ProductTest extends TestCase
 {
