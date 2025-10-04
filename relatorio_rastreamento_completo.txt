@@ -1,0 +1,32 @@
+PHPUnit 12.0.0 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.4.13
+Configuration: C:\xampp\htdocs\Nextshop-php-unit\phpunit.xml
+
+D.......D......                                                   15 / 15 (100%)
+
+Time: 00:01.520, Memory: 8.00 MB
+
+Pagamento
+ ✔ It should process payment successfully
+ ✔ It should not process empty cart
+ ✔ It should handle database errors
+ ✔ It should process products with different quantities
+
+Product
+ ✔ It should be able to list all products
+ ✔ It should be able to get specific product by id
+ ✔ It should be able to add new product
+ ✔ It shouldnt get product with invalid id
+
+User
+ ✔ It should be able to create user
+ ✔ It should be able to sign in
+ ✔ It shouldnt login with invalid credentials
+ ✔ It should be able to check user by email
+ ✔ It should verify if is logged in
+ ✔ It should not create user with empty fields
+ ✔ It should get first user
+
+OK, but there were issues!
+Tests: 15, Assertions: 24, Deprecations: 2.
