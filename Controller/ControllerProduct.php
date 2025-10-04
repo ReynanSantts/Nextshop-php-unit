@@ -9,7 +9,7 @@ class ControllerProduct
     private $model; // Propriedade para armazenar a instância do model
 
     // Construtor modificado para aceitar injeção do model
-    public function __construct(PDO $pdo, ModelProduct $model = null)
+    public function __construct(PDO $pdo, ?ModelProduct $model = null)
     {
         $this->model = $model ?: new ModelProduct($pdo);
     }

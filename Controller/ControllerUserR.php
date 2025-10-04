@@ -10,7 +10,7 @@ class ControllerUserR
     private $userModel;
 
     // CONSTRUTOR MODIFICADO para injeção de dependência
-    public function __construct(User $userModel = null)
+    public function __construct(?User $userModel = null)
     {
         $this->userModel = $userModel ?: new User();
     }

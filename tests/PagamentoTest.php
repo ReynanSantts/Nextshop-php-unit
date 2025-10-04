@@ -1,9 +1,9 @@
 <?php
 
+require_once 'TestTracker.php';
 use PHPUnit\Framework\TestCase;
 use Controller\ControllerProduct;
 use Model\ModelProduct;
-require_once 'TestTracker.php';
 
 class PagamentoTest extends TestCase
 {
