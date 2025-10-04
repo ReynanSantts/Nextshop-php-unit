@@ -69,4 +69,20 @@ class PagamentoTest extends TestCase
 
         $this->assertTrue($result);
     }
+
+     #[\PHPUnit\Framework\Attributes\Test]
+    public function it_should_handle_maximum_payment_value()
+{
+    
+    $this->mockModelProduct->method('addProduct')->willReturn(true);
+    
+    $result = $this->mockController->addProduct(
+        'Produto Caro',
+        999999.99,
+        '../templates/images/produto.jpg',
+        1
+    );
+    
+    $this->assertTrue($result);
+}
 }

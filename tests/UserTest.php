@@ -20,10 +20,10 @@ class UserTest extends TestCase
     public function it_should_be_able_to_create_user()
     {
         $this->mockUserModel->method('registerUser')->willReturn(true);
-        
+
         $userResult = $this->userController->createUser(
-            'Reynan Mesquita', 
-            'reynanmesquita@gmail.com', 
+            'Reynan Mesquita',
+            'reynanmesquita@gmail.com',
             '123.456.789-00',
             '123456'
         );
@@ -37,7 +37,7 @@ class UserTest extends TestCase
         $this->mockUserModel->method('getUserByEmail')->willReturn([
             "id" => 1,
             "user_name" => "Reynan Mesquita",
-            "user_email" => "reynanmesquita@gmail.com",  
+            "user_email" => "reynanmesquita@gmail.com",
             "password" => password_hash("123456", PASSWORD_DEFAULT)
         ]);
 
@@ -121,6 +121,34 @@ class UserTest extends TestCase
 
         $result = $this->userController->getFirstUser();
         $this->assertEquals($userData, $result);
+    }
+
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function it_should_handle_registration_database_failure()
+    {
+        $this->mockUserModel->method('registerUser')
+            ->willThrowException(new \Exception("Database error"));
+
+        $this->expectException(\Exception::class);
+        $this->userController->createUser('Nome', 'email@test.com', '123.456.789-00', '123456');
+    }
+
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function it_should_handle_maximum_name_length()
+    {
+
+        $longName = str_repeat('A', 100);
+
+        $this->mockUserModel->method('registerUser')->willReturn(true);
+
+        $result = $this->userController->createUser(
+            $longName,
+            'email@test.com',
+            '123.456.789-00',
+            '123456'
+        );
+
+        $this->assertTrue($result);
     }
 }
 

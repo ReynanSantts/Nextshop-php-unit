@@ -14,7 +14,7 @@ class ProductTest extends TestCase
     {
         $this->mockModelProduct = $this->createMock(ModelProduct::class);
         $mockPdo = $this->createMock(PDO::class);
-        
+
         $this->productController = new ControllerProduct($mockPdo, $this->mockModelProduct);
     }
 
@@ -85,12 +85,52 @@ class ProductTest extends TestCase
     #[\PHPUnit\Framework\Attributes\Test]
     public function it_shouldnt_get_product_with_invalid_id()
     {
-        // CORREÇÃO: willReturn() ANTES de with()
         $this->mockModelProduct->method('getProductById')
             ->willReturn(false);
 
         $result = $this->productController->getProduct(999);
 
         $this->assertFalse($result);
+    }
+
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function it_should_handle_database_connection_error()
+    {
+        $this->mockModelProduct->method('getAllProducts')
+            ->willThrowException(new \PDOException("Connection failed"));
+        $this->expectException(\PDOException::class);
+        $this->productController->listProducts();
+    }
+
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function it_should_handle_maximum_product_quantity()
+    {
+
+        $this->mockModelProduct->method('addProduct')->willReturn(true);
+
+        $result = $this->productController->addProduct(
+            'Produto Teste',
+            100.00,
+            '../templates/images/test.jpg',
+            9999
+        );
+
+        $this->assertTrue($result);
+    }
+
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function it_should_handle_minimum_product_quantity()
+    {
+
+        $this->mockModelProduct->method('addProduct')->willReturn(true);
+
+        $result = $this->productController->addProduct(
+            'Produto Teste',
+            100.00,
+            '../templates/images/test.jpg',
+            1
+        );
+
+        $this->assertTrue($result);
     }
 }
