@@ -1,27 +1,36 @@
 <?php
 // tests/run-tests-with-tracking.php
-require_once __DIR__ . '/../vendor/autoload.php';
 
-echo "EXECUTANDO TESTES COM RASTREAMENTO...\n\n";
-echo "Os testes serão executados e o relatório gerado automaticamente.\n";
-echo "Aguarde...\n\n";
+echo "🚀 EXECUTANDO TESTES COM RASTREAMENTO AUTOMÁTICO...\n\n";
+echo "Este script executará todos os testes e gerará um relatório detalhado.\n\n";
 
-// Executar os testes
+// Comando CORRETO para Windows - sem --verbose
+$command = 'vendor\\bin\\phpunit --testdox 2>&1';
+
+echo "Executando: $command\n\n";
+
+// Executar o comando e capturar a saída
 $output = [];
 $returnCode = 0;
-exec('./vendor/bin/phpunit --configuration phpunit.xml 2>&1', $output, $returnCode);
+exec($command, $output, $returnCode);
 
-// Mostrar a saída do PHPUnit
+// Salvar o relatório em arquivo
+$relatorio = implode("\n", $output);
+file_put_contents('relatorio_rastreamento_completo.txt', $relatorio);
+
+// Mostrar na tela
 foreach ($output as $line) {
     echo $line . "\n";
 }
 
 // Mensagem final
-echo "\n";
+echo "\n" . str_repeat("=", 50) . "\n";
+echo "📊 RELATÓRIO SALVO: relatorio_rastreamento_completo.txt\n";
+
 if ($returnCode === 0) {
-    echo " Todos os testes passaram!\n";
+    echo "✅ TODOS OS TESTES PASSARAM!\n";
 } else {
-    echo " Alguns testes falharam.\n";
+    echo "⚠️  ALGUNS TESTES FALHARAM!\n";
 }
 
-echo " Verifique o relatório em: relatorio_rastreamento.txt\n";
+echo str_repeat("=", 50) . "\n";
