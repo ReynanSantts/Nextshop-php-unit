@@ -4,7 +4,6 @@
 echo "🚀 EXECUTANDO TESTES COM RASTREAMENTO AUTOMÁTICO...\n\n";
 echo "Este script executará todos os testes e gerará um relatório detalhado.\n\n";
 
-// Comando CORRETO para Windows - sem --verbose
 $command = 'vendor\\bin\\phpunit --testdox 2>&1';
 
 echo "Executando: $command\n\n";
