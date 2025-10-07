@@ -55,8 +55,7 @@ class ProductTest extends TestCase
             "image" => "../templates/images/placa.jfif",
             "qtd" => 8
         ];
-
-        // CORREÇÃO: willReturn() ANTES de with()
+        
         $this->mockModelProduct->method('getProductById')
             ->willReturn($expectedProduct);
 
@@ -68,7 +67,6 @@ class ProductTest extends TestCase
     #[\PHPUnit\Framework\Attributes\Test]
     public function it_should_be_able_to_add_new_product()
     {
-        // CORREÇÃO: willReturn() ANTES de with()
         $this->mockModelProduct->method('addProduct')
             ->willReturn(true);
 
