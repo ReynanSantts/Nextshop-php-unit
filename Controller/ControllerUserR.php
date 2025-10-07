@@ -38,10 +38,10 @@ class ControllerUserR
 
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['id'] = $user['id'];
-            $_SESSION['user_fullname'] = $user['user_name']; // Novo campo para testes
-            $_SESSION['user_name'] = $user['user_name'];     // Mantido para compatibilidade
-            $_SESSION['email'] = $user['user_email'];        // Novo campo para testes  
-            $_SESSION['user_email'] = $user['user_email'];   // Mantido para compatibilidade
+            $_SESSION['user_fullname'] = $user['user_name']; 
+            $_SESSION['user_name'] = $user['user_name'];     
+            $_SESSION['email'] = $user['user_email'];      
+            $_SESSION['user_email'] = $user['user_email'];  
             return true;
         }
         return false;
