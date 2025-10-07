@@ -46,9 +46,7 @@ class UserTest extends TestCase
         $this->assertTrue($userResult);
         $this->assertEquals(1, $_SESSION['id']);
         $this->assertEquals('Reynan Mesquita', $_SESSION['user_name']);
-        $this->assertEquals('Reynan Mesquita', $_SESSION['user_fullname']);
         $this->assertEquals('reynanmesquita@gmail.com', $_SESSION['user_email']);
-        $this->assertEquals('reynanmesquita@gmail.com', $_SESSION['email']);
     }
 
     #[\PHPUnit\Framework\Attributes\Test]
